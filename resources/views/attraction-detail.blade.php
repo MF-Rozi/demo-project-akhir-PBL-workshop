@@ -8,7 +8,7 @@
     <div class="container">
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ $attraction->zone->name }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('zone.show', $attraction->zone->id) }}">{{ $attraction->zone->name }}</a></li>
             <li class="breadcrumb-item active">{{ $attraction->name }}</li>
         </ol>
     </div>

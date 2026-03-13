@@ -23,4 +23,13 @@ class HomeController extends Controller
         
         return view('attraction-detail', compact('attraction', 'averageRating'));
     }
+
+    public function zoneShow(Zone $zone)
+    {
+        $zone->load(['attractions' => function ($query) {
+            $query->latest();
+        }]);
+
+        return view('zone-detail', compact('zone'));
+    }
 }

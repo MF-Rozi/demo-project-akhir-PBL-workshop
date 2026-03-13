@@ -33,9 +33,10 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $zone->name }}</h5>
                             <p class="card-text text-muted small">{{ Str::limit($zone->description, 80) }}</p>
-                            <p class="mb-0">
+                            <p class="mb-3">
                                 <span class="badge bg-info">{{ $zone->attractions_count }} Attractions</span>
                             </p>
+                            <a href="{{ route('zone.show', $zone->id) }}" class="btn btn-outline-primary btn-sm">View Zone</a>
                         </div>
                     </div>
                 </div>

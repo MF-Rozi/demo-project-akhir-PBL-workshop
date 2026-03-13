@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/zone/{zone}', [HomeController::class, 'zoneShow'])->name('zone.show');
 Route::get('/attraction/{attraction}', [HomeController::class, 'show'])->name('attraction.show');
 Route::post('/review', [ReviewController::class, 'store'])->name('review.store');
 

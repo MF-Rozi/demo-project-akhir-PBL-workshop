@@ -15,5 +15,11 @@ class AdminUserSeeder extends Seeder
             'email' => 'admin@asiaheritage.com',
             'password' => Hash::make('password'),
         ]);
+
+        User::create([
+            'name' => 'Superadmin',
+            'email' => 'superadmin@mail.com',
+            'password' => Hash::make('12345678'),
+        ]);
     }
 }

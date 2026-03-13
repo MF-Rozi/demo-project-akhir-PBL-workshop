@@ -30,8 +30,9 @@ class AttractionController extends Controller
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        // dd($request->all(), $validated);
         if ($request->hasFile('image')) {
+            // dd($validated['image']);
             $validated['image'] = $request->file('image')->store('attractions', 'public');
         }
 
