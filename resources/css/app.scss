@@ -1,0 +1,34 @@
+// Import Bootstrap 5
+@import 'bootstrap/scss/bootstrap';
+
+// Custom styles
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+.zone-card, .attraction-card {
+    transition: transform 0.3s ease;
+}
+
+.zone-card:hover, .attraction-card:hover {
+    transform: translateY(-5px);
+}
+
+.rating-stars {
+    color: #ffc107;
+}
+
+.admin-sidebar {
+    min-height: 100vh;
+    background-color: #343a40;
+}
+
+.admin-sidebar .nav-link {
+    color: #adb5bd;
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    color: #fff;
+    background-color: #495057;
+}
