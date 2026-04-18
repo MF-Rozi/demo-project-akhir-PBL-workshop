@@ -28,7 +28,7 @@ class AttractionController extends Controller
             'zone_id' => 'required|exists:zones,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
         // dd($request->all(), $validated);
         if ($request->hasFile('image')) {
@@ -53,7 +53,7 @@ class AttractionController extends Controller
             'zone_id' => 'required|exists:zones,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         if ($request->hasFile('image')) {

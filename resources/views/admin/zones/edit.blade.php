@@ -50,7 +50,7 @@
                         @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                        <small class="text-muted">Max file size: 2MB. Supported formats: JPEG, PNG, JPG, GIF</small>
+                        <small class="text-muted">Max file size: 5MB. Supported formats: JPEG, PNG, JPG, GIF, WEBP</small>
                     </div>
 
                     <div class="d-flex justify-content-between">
