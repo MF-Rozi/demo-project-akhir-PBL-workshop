@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Attraction extends Model
 {
@@ -20,14 +20,14 @@ class Attraction extends Model
         return $this->belongsTo(Zone::class);
     }
 
-    public function reviews(): HasMany
+    public function reviews(): MorphMany
     {
-        return $this->hasMany(Review::class);
+        return $this->morphMany(Review::class, 'reviewable');
     }
 
-    public function approvedReviews(): HasMany
+    public function approvedReviews(): MorphMany
     {
-        return $this->hasMany(Review::class)->where('is_approved', true);
+        return $this->reviews()->where('is_approved', true);
     }
 
     public function averageRating()

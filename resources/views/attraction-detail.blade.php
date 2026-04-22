@@ -99,7 +99,8 @@
 
                         <form action="{{ route('review.store') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="attraction_id" value="{{ $attraction->id }}">
+                            <input type="hidden" name="reviewable_type" value="attraction">
+                            <input type="hidden" name="reviewable_id" value="{{ $attraction->id }}">
 
                             <div class="mb-3">
                                 <label for="visitor_name" class="form-label">Your Name</label>

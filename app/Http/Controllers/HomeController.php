@@ -28,8 +28,10 @@ class HomeController extends Controller
     {
         $zone->load(['attractions' => function ($query) {
             $query->latest();
-        }]);
+        }, 'approvedReviews']);
 
-        return view('zone-detail', compact('zone'));
+        $averageRating = $zone->averageRating();
+
+        return view('zone-detail', compact('zone', 'averageRating'));
     }
 }

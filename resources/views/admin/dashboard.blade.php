@@ -55,7 +55,8 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Attraction</th>
+                                <th>Target</th>
+                                <th>Type</th>
                                 <th>Visitor</th>
                                 <th>Rating</th>
                                 <th>Comment</th>
@@ -66,7 +67,12 @@
                         <tbody>
                             @forelse($recent_reviews as $review)
                                 <tr>
-                                    <td>{{ $review->attraction->name }}</td>
+                                    <td>{{ $review->attraction?->name ?? $review->zone?->name }}</td>
+                                    <td>
+                                        <span class="badge {{ $review->isAttractionReview() ? 'bg-primary' : 'bg-info' }}">
+                                            {{ $review->isAttractionReview() ? 'Attraction' : 'Zone' }}
+                                        </span>
+                                    </td>
                                     <td>{{ $review->visitor_name }}</td>
                                     <td>
                                         <span class="rating-stars">
@@ -91,7 +97,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center text-muted">No reviews yet</td>
+                                    <td colspan="7" class="text-center text-muted">No reviews yet</td>
                                 </tr>
                             @endforelse
                         </tbody>

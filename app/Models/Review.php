@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Review extends Model
 {
     protected $fillable = [
-        'attraction_id',
+        'reviewable_type',
+        'reviewable_id',
         'visitor_name',
         'visitor_email',
         'rating',
@@ -21,9 +22,24 @@ class Review extends Model
         'rating' => 'integer',
     ];
 
-    public function attraction(): BelongsTo
+    public function reviewable(): MorphTo
     {
-        return $this->belongsTo(Attraction::class);
+        return $this->morphTo();
+    }
+
+    public function isAttractionReview(): bool
+    {
+        return $this->reviewable_type === Attraction::class;
+    }
+
+    public function getAttractionAttribute(): ?Attraction
+    {
+        return $this->isAttractionReview() ? $this->reviewable : null;
+    }
+
+    public function getZoneAttribute(): ?Zone
+    {
+        return $this->isAttractionReview() ? null : $this->reviewable;
     }
 
     public function scopeApproved($query)

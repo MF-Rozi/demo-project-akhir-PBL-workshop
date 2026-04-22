@@ -24,7 +24,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Attraction</th>
+                        <th>Target</th>
+                        <th>Type</th>
                         <th>Zone</th>
                         <th>Visitor</th>
                         <th>Rating</th>
@@ -37,8 +38,13 @@
                 <tbody>
                     @forelse($reviews as $review)
                         <tr>
-                            <td>{{ $review->attraction->name }}</td>
-                            <td>{{ $review->attraction->zone->name }}</td>
+                            <td>{{ $review->attraction?->name ?? $review->zone?->name }}</td>
+                            <td>
+                                <span class="badge {{ $review->isAttractionReview() ? 'bg-primary' : 'bg-info' }}">
+                                    {{ $review->isAttractionReview() ? 'Attraction' : 'Zone' }}
+                                </span>
+                            </td>
+                            <td>{{ $review->attraction?->zone?->name ?? $review->zone?->name }}</td>
                             <td>
                                 <strong>{{ $review->visitor_name }}</strong><br>
                                 <small class="text-muted">{{ $review->visitor_email }}</small>
@@ -83,7 +89,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center text-muted">No reviews found.</td>
+                            <td colspan="9" class="text-center text-muted">No reviews found.</td>
                         </tr>
                     @endforelse
                 </tbody>

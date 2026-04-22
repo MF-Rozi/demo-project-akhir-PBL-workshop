@@ -3,14 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attraction;
 use App\Models\Review;
+use App\Models\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class ReviewController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Review::with('attraction.zone');
+        $query = Review::with([
+            'reviewable' => function (MorphTo $morphTo) {
+                $morphTo->morphWith([
+                    Attraction::class => ['zone'],
+                    Zone::class => [],
+                ]);
+            },
+        ]);
 
         // Filter by status
         if ($request->has('status')) {

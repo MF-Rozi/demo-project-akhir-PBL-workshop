@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Zone;
 use App\Models\Attraction;
 use App\Models\Review;
-use Illuminate\Http\Request;
+use App\Models\Zone;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class DashboardController extends Controller
 {
@@ -20,7 +20,14 @@ class DashboardController extends Controller
             'approved_reviews' => Review::approved()->count(),
         ];
 
-        $recent_reviews = Review::with('attraction')->latest()->take(5)->get();
+        $recent_reviews = Review::with([
+            'reviewable' => function (MorphTo $morphTo) {
+                $morphTo->morphWith([
+                    Attraction::class => ['zone'],
+                    Zone::class => [],
+                ]);
+            },
+        ])->latest()->take(5)->get();
 
         return view('admin.dashboard', compact('stats', 'recent_reviews'));
     }

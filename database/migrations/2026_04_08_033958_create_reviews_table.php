@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('attraction_id')->constrained()->onDelete('cascade');
+            $table->morphs('reviewable');
             $table->string('visitor_name');
             $table->string('visitor_email');
             $table->tinyInteger('rating')->unsigned();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('is_approved')->default(false);
             $table->timestamps();
             
-            $table->index(['attraction_id', 'is_approved']);
+            $table->index(['reviewable_type', 'reviewable_id', 'is_approved']);
         });
     }
 
